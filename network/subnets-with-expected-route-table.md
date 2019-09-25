@@ -1,4 +1,4 @@
-## Audit subnets that does not have one of the whitelisted route table
+## Audit virtual networks that has subnets without expected route table
 
 Control egress traffic from your virtual networks through Azure Firewall or 3rd party NVA such as Fortigate or Checkpoint.  This policy ensures that:
 
@@ -69,5 +69,157 @@ Control egress traffic from your virtual networks through Azure Firewall or 3rd 
     }
   },
   "parameters": {}
+}
+```
+
+### Test
+
+This ARM template contains 4 uses cases that can be utilized to test the behaviour of the 2 policies.
+
+```json
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+            "name": "expected-udr",
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2018-08-01",
+            "location": "[resourceGroup().location]",
+            "tags": {},
+            "properties": {
+                "routes": [
+                    {
+                        "name": "route1",
+                        "properties": {
+                            "addressPrefix": "0.0.0.0/0",
+                            "nextHopType": "VirtualAppliance",
+                            "nextHopIpAddress": "10.0.0.5"
+                        }
+                    }
+                ],
+                "disableBgpRoutePropagation": true
+            }
+        },
+        {
+            "name": "another-udr",
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2018-08-01",
+            "location": "[resourceGroup().location]",
+            "tags": {},
+            "properties": {
+                "routes": [
+                    {
+                        "name": "route1",
+                        "properties": {
+                            "addressPrefix": "0.0.0.0/0",
+                            "nextHopType": "VirtualAppliance",
+                            "nextHopIpAddress": "10.0.0.5"
+                        }
+                    }
+                ],
+                "disableBgpRoutePropagation": true
+            }
+        },
+        {
+            "dependsOn": [
+                "Microsoft.Network/routeTables/expected-udr"
+            ],
+            "name": "vnet-with-expected-udr",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2018-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24",
+                            "routeTable": {
+                                "id": "[resourceId('Microsoft.Network/routeTables','expected-udr')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "dependsOn": [
+                "Microsoft.Network/routeTables/another-udr"
+            ],
+            "name": "vnet-with-another-udr",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2018-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24",
+                            "routeTable": {
+                                "id": "[resourceId('Microsoft.Network/routeTables','another-udr')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "vnet-with-no-udr",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2018-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "vnet-autocreated-asr",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2018-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {}
 }
 ```
