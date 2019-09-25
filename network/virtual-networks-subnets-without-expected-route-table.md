@@ -4,7 +4,7 @@ Control egress traffic from your virtual networks through Azure Firewall or 3rd 
 
 1. Every subnet is configured with a Route Table
 2. Route tables are from the whitelisted (typically controlled by another organization such as Network Team or InfoSec)
-3. Policy #2 only - there are some virtual that you may want to exclude such as the ones created for Azure Site Recovery tests
+3. Policy #2 only - there are some virtual networks that you may want to exclude such as the ones created for Azure Site Recovery tests
 
 ### Steps
 
