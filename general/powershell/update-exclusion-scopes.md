@@ -8,7 +8,7 @@
 
 ### Notes
 
-1. One Policy assignment can have up to 400 exclusions only.  [See Policy limits reference](https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits#azure-policy-limits)
+1. One Policy assignment can have up to 400 exclusion scopes.  [See Policy limits reference](https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits#azure-policy-limits)
 
 ```powershell
 
