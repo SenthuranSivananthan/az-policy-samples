@@ -12,7 +12,7 @@
 
 ```powershell
 
-$PolicyAssignmentId = "/providers/Microsoft.Management/managementGroups/Senthuran/providers/Microsoft.Authorization/policyAssignments/90810c5368f84bf09d37551b"
+$PolicyAssignmentId = "/providers/Microsoft.Management/managementGroups/_____MANAGEMENT_GROUP_____/providers/Microsoft.Authorization/policyAssignments/_____ASSIGNMENT_ID_____"
 
 $Assignment = Get-AzPolicyAssignment -Id $PolicyAssignmentId
 
