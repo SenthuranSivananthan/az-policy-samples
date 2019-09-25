@@ -23,6 +23,7 @@
 1. VMs that are not satified in (Step 1) will not be shown in Compliance View 
 2. The tag name `policy-check-skip-asr` is arbitary.  You can change it to anything you like in the policy.
 3. The tag name can also be parameterized.  For simplicity and ease of understanding, I've set the static value.
+4. Maximum of 50 tags per resource.
 
 ```json
 {
