@@ -11,6 +11,10 @@ Control egress traffic from your virtual networks through Azure Firewall or 3rd 
 1. Identify the Route Table IDs that will be in the whitelist and replace the **notIn** array in the policy
 2. Policy #2 only - identify the names of virtual networks to exclude and you can use patterns to filter
 
+### Notes
+
+* These policies will mark the entire virtual network as non-compliant.  For example, if the virtual network contained 5 subnets, all it would take for the virtual network to be marked non-compliant is 1 subnet that doesn't have the compliance configuration.  For per-subnet view, consider [this example](subnets-without-route-table-or-excluded-by-name.md).
+
 ### Policies
 #### Policy #1
 
