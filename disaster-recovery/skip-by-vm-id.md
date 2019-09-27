@@ -28,7 +28,7 @@ This policy is shared to describe the approach for generating VM Resource IDs us
           ]
         },
         {
-          "value": "[concat(resourceGroup().id, '/providers/Microsoft.Compute/virtualMachines/', field('name'))]",
+          "value": "[concat(resourceGroup().id, '/providers/', field('type'), '/', field('name'))]",
           "notIn": [
             "/subscriptions/____SUBSCRIPTION_ID____/resourceGroups/____RESOURCEGROUP_NAME____/providers/Microsoft.Compute/virtualMachines/____VM_NAME____"
           ]
