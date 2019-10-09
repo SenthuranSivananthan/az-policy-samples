@@ -1,5 +1,6 @@
 ## Audit for API Management instances that have direct public access
 
+Please see the connectivity topologies on [Azure Docs](https://docs.microsoft.com/en-us/azure/api-management/api-management-using-with-vnet#-enable-vnet-connection).
 
 ```json
 {
