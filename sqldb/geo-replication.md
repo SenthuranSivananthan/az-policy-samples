@@ -1,4 +1,4 @@
-## Audit for SQL Databases without geo-replication
+## Audit for SQL Databases without geo-replication - work in progress
 
 ```json
 {
@@ -8,7 +8,7 @@
       "allOf": [
         {
           "field": "type",
-          "equals": "Microsoft.Sql/servers/disasterRecoveryConfiguration"
+          "equals": "Microsoft.Sql/servers"
         },
         {
           "field": "Microsoft.Sql/servers/disasterRecoveryConfiguration/partnerServerId",
