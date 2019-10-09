@@ -1,4 +1,4 @@
-## Audit Redis Cache instances without Virtual Network integration
+## Audit Redis Cache instances without virtual network isolation
 
 ```json
 {
