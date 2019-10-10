@@ -18,7 +18,7 @@
                 },
                 {
                     "field": "Microsoft.Compute/virtualMachines/instanceView.statuses[*].code",
-                    "in": ["PowerState/running"]
+                    "notEquals": "PowerState/deallocated"
                 },
                 {
                     "anyOf": [
