@@ -1,23 +1,18 @@
-## Audit for SQL Databases without geo-replication - work in progress
+## Audit for SQL Databases without geo-replication
 
 ```json
 {
   "mode": "All",
   "policyRule": {
     "if": {
-      "allOf": [
-        {
-          "field": "type",
-          "equals": "Microsoft.Sql/servers"
-        },
-        {
-          "field": "Microsoft.Sql/servers/disasterRecoveryConfiguration/partnerServerId",
-          "exists": "false"
-        }
-      ]
+      "field": "type",
+      "equals": "Microsoft.Sql/servers/databases"
     },
     "then": {
-      "effect": "audit"
+      "effect": "auditIfNotExists",
+      "details": {
+        "type": "Microsoft.Sql/servers/databases/replicationLinks"
+      }
     }
   },
   "parameters": {}
