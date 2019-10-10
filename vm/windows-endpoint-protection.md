@@ -1,8 +1,10 @@
 ## Audit for virtual machines that doesn't either have Endpoint Protection or Endpoint Protection is in a non-healthy status
 
+### Work in progress
+
 **Notes**:
 
-1.  Policy will only scan for virtual machines that are running.
+1.  Policy will only scan for virtual machines that are running. - work in progress to figure out how
 2.  The signature for VM image can change over time as new operating systems are released.
 3.  Endpoint assessment is executed by [Azure Security Center based on these rules](https://docs.microsoft.com/en-us/azure/security-center/security-center-endpoint-protection).
 
@@ -15,10 +17,6 @@
                 {
                     "field": "type",
                     "equals": "Microsoft.Compute/virtualMachines"
-                },
-                {
-                    "field": "Microsoft.Compute/virtualMachines/instanceView.statuses[*].code",
-                    "notEquals": "PowerState/deallocated"
                 },
                 {
                     "anyOf": [
