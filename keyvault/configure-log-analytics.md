@@ -8,7 +8,7 @@ This policy will deploy diagnostic settings as a post-deployment step.  Since th
 **Note:** If Log Analytics workspace is kept in a separate Subscription or Resource Group, make sure to assign the policy as:
 
 * At a management group where both Key Vault and Log Analytics can inherit the Managed Service Identity; or
-* Manually add the Managed Service Identity (MSI) created to the Log Analytics workspace with the permision *Log Analytics Contributor*.  MSI is listed on the Assignment screen once it's saved.
+* Manually add the Managed Service Identity (MSI) created to the Log Analytics workspace with the permision *Log Analytics Contributor*.  MSI is listed on the Assignment screen under Remediation once it's saved.
 
 ```json
 {
