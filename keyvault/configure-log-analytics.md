@@ -15,7 +15,7 @@ This policy will deploy diagnostic settings as a post-deployment step.  Since th
 
 **#2:** The MSI created for the assignment will be automatically deleted when the assignment is removed.
 
-**#3:** The policy looks for a diagnostic settings with the value provided in the parameter *diagnosticSettingsName*.  This parameter has the default value **setbypolicy** but can be customized to apply to your environment.
+**#3:** The policy sets diagnostic settings with the value provided in the parameter *diagnosticSettingsName*.  This parameter has the default value **setbypolicy** but can be customized to apply to your environment.
 
 **#4:** Only attempts to create diagnostic settings if there isn't one setup with Log Analytics.  Policy will enable Metrics and Logs.  This can be customized in the policy by removing either Metrics or Logs sections per your environment.
 
