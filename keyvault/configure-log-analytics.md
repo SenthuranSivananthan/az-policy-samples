@@ -15,6 +15,8 @@ This policy will deploy diagnostic settings as a post-deployment step.  Since th
 
 **Note 3:** The policy looks for a diagnostic settings with the value provided in the parameter *diagnosticSettingsName*.  This parameter has the default value **setbypolicy** but can be customized to apply to your environment.
 
+**Note 4:** Only attempts to create diagnostic settings if there isn't one setup with Log Analytics.  Policy will enable Metrics and Logs.  This can be customized in the policy by removing either Metrics or Logs sections per your environment.
+
 ```json
 {
   "mode": "All",
@@ -27,7 +29,14 @@ This policy will deploy diagnostic settings as a post-deployment step.  Since th
       "effect": "DeployIfNotExists",
       "details": {
         "type": "Microsoft.Insights/diagnosticSettings",
-        "name": "[parameters('diagnosticSettingsName')]",
+        "existenceCondition": {
+          "allOf": [
+            {
+              "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
+              "exists": "true"
+            }
+          ]
+        },
         "deployment": {
           "properties": {
             "mode": "incremental",
@@ -106,7 +115,7 @@ This policy will deploy diagnostic settings as a post-deployment step.  Since th
     "diagnosticSettingsName": {
       "type": "String",
       "metadata": {
-        "displayName": "Diagnostic Settings Display Name"
+        "displayName": "Diagnostic Settings Name"
       },
       "defaultValue": "setbypolicy"
     }
