@@ -5,17 +5,21 @@ This policy will deploy diagnostic settings as a post-deployment step.  Since th
 * Key Vault Contributor
 * Log Analytics Contributor
 
-**Note 1:** If Log Analytics workspace is kept in a separate Subscription or Resource Group, make sure to assign the policy as:
+## Design Choices
+
+**#1:** If Log Analytics workspace is kept in a separate Subscription or Resource Group, make sure to assign the policy as:
 
 * At a management group where both Key Vault and Log Analytics can inherit the Managed Service Identity; or
 * Manually add the Managed Service Identity (MSI) created to the Log Analytics workspace with the permision *Log Analytics Contributor*.  MSI is listed on the Assignment screen.  The name is the guid that's part of the assignment id.  For example:
   /subscriptions/xxxxxxxxxxxxxxxxxx/resourceGroups/xxxxxxx/providers/Microsoft.Authorization/policyAssignments/**2a2b62bc7d29476e8afe9ec9**
 
-**Note 2:** The MSI created for the assignment will be automatically deleted when the assignment is removed.
+**#2:** The MSI created for the assignment will be automatically deleted when the assignment is removed.
 
-**Note 3:** The policy looks for a diagnostic settings with the value provided in the parameter *diagnosticSettingsName*.  This parameter has the default value **setbypolicy** but can be customized to apply to your environment.
+**#3:** The policy looks for a diagnostic settings with the value provided in the parameter *diagnosticSettingsName*.  This parameter has the default value **setbypolicy** but can be customized to apply to your environment.
 
-**Note 4:** Only attempts to create diagnostic settings if there isn't one setup with Log Analytics.  Policy will enable Metrics and Logs.  This can be customized in the policy by removing either Metrics or Logs sections per your environment.
+**#4:** Only attempts to create diagnostic settings if there isn't one setup with Log Analytics.  Policy will enable Metrics and Logs.  This can be customized in the policy by removing either Metrics or Logs sections per your environment.
+
+## Policy
 
 ```json
 {
