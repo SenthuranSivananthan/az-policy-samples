@@ -1,9 +1,9 @@
 ## Configure Log Analytics workspace for metrics and logs
 
-This policy will deploy diagnostic settings as a post-deployment step.  Since this policy will be modifying resources, it needs a Managed Service Identity to complete the changes.  The roles that are required:
+This policy will deploy diagnostic settings as a post-deployment step.  Since this policy will be modifying resources, it needs a Managed Service Identity to complete the changes.  The built-in roles that are required:
 
-* Azure Event Hubs Data Owner
-* Log Analytics Contributor
+* [Azure Event Hubs Data Owner](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#azure-event-hubs-data-owner)
+* [Log Analytics Contributor](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#log-analytics-contributor)
 
 ## Design Choices
 
