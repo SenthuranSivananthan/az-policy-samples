@@ -1,4 +1,4 @@
-## Disable Remote Debugging on Web Apps
+## Disable Remote Debugging on Web Apps, API Apps and Function Apps
 
 This policy will allow for remediation when Web Apps are deployed with Remote Debugging.  This is a deployIfNotExist policy, therefore:
 
@@ -22,8 +22,20 @@ This policy uses Managed Service Identity to make the configuration changes.  MS
           "equals": "Microsoft.Web/sites"
         },
         {
-          "field": "kind",
-          "like": "app*"
+          "anyOf": [
+            {
+              "field": "kind",
+              "like": "app*"
+            },
+            {
+              "field": "kind",
+              "like": "functionapp*"
+            },
+            {
+              "field": "kind",
+              "like": "*api"
+            }
+          ]
         }
       ]
     },
