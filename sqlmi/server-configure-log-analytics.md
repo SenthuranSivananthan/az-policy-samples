@@ -117,15 +117,13 @@ This policy will deploy diagnostic settings as a post-deployment step.  Since th
       "type": "String",
       "metadata": {
         "displayName": "Log Analytics Workspace Id",
-        "description": null,
         "strongType": "omsWorkspace"
       }
     },
     "diagnosticSettingsName": {
       "type": "String",
       "metadata": {
-        "displayName": "Diagnostic Settings Display Name",
-        "description": null
+        "displayName": "Diagnostic Settings Display Name"
       },
       "defaultValue": "setbypolicy"
     }
