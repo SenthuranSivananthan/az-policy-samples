@@ -19,7 +19,7 @@ This policy will deploy diagnostic settings as a post-deployment step.  Since th
 
 **#4:** Only attempts to create diagnostic settings if there isn't one setup with Log Analytics.  Policy will enable Metrics and Logs.  This can be customized in the policy by removing either Metrics or Logs sections per your environment.
 
-**#5:** Logs will be stored in dedicated Log Analytics tables.  This is configured with *logAnalyticsDestinationType* property.
+**#5:** Logs will be stored in **Resource specific** tables in Log Analytics.  This is configured with *logAnalyticsDestinationType* property.
 
 ## Policy
 
