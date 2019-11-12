@@ -23,8 +23,16 @@ See [Soft delete for Azure Storage blobs](https://docs.microsoft.com/en-us/azure
           "equals": "Microsoft.Storage/storageAccounts"
         },
         {
-          "field": "Microsoft.Storage/storageAccounts/isHnsEnabled",
-          "equals": "false"
+          "anyOf": [
+            {
+              "field": "Microsoft.Storage/storageAccounts/isHnsEnabled",
+              "exists": "false"
+            },
+            {
+              "field": "Microsoft.Storage/storageAccounts/isHnsEnabled",
+              "equals": "false"
+            }
+          ]
         }
       ]
     },
