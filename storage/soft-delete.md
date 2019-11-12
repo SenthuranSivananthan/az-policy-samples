@@ -6,13 +6,27 @@ When data is deleted, it transitions to a soft deleted state instead of being pe
 
 See [Soft delete for Azure Storage blobs](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-soft-delete) for more information.
 
+## Design Choices
+
+**#1:** The policy skips ADLS Gen2 storage accounts since they don't support soft-delete.
+
+## Policy
+
 ```json
 {
   "mode": "All",
   "policyRule": {
     "if": {
-      "field": "type",
-      "equals": "Microsoft.Storage/storageAccounts"
+      "allOf": [
+        {
+          "field": "type",
+          "equals": "Microsoft.Storage/storageAccounts"
+        },
+        {
+          "field": "Microsoft.Storage/storageAccounts/isHnsEnabled",
+          "equals": "false"
+        }
+      ]
     },
     "then": {
       "effect": "auditIfNotExists",
